@@ -1,13 +1,13 @@
-#ICERM 2020-11 tutorial
+# ICERM 2020-11 tutorial
 
 
-==Tutorial 0: Principles of iterative fitting==
+##Tutorial 0: Principles of iterative fitting
 
 Open the file [Demo-RIFT_Principles](Demo-RIFT_Principles.ipynb).  If you don't have a jupyter notebook viewer on your own machine, 
 you can download and re-upload this to ``colab.research.google.com``.  This notebook only requires standard python packages (numpy,scipy, sklearn, matplotlib)
 
 
-==Tutorial 1: RIFT in action==
+##Tutorial 1: RIFT in action
 
 This tutorial generates a simple binary black hole gravitational wave signal in a 2-detector network,
 then recovers its parameters under the assumption of known gaussian noise in these two detectors.
@@ -52,7 +52,7 @@ Again, the [RIFT getting started](https://github.com/oshaughn/research-projects-
 ```
 
 
-==Tutorial 2: Production-quality analysis==
+##Tutorial 2: Production-quality analysis
 
 The procedure described in tutorial 1 is exhausting for real analysis: we need to chooise a grid, prior range, iteration structure, and other settings (e.g., the frequency of puffball).  For production-quality analysis, we have encoded best practices into ``util_RIFT_pseudo_pipe.py``.   If you have used LALInference, you can immediately re-use your configuration to analyze with our script
 
