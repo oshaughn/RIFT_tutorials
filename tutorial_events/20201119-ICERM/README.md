@@ -24,12 +24,12 @@ Similar to the  calculation above, this tutorial uses ``CIP`` (construct_intrins
 **Step-by-step process**
 * Step 0: Install prerequisite: Docker (docker.com)
 * Step 1: Start the container used for this tutorial
-``
+```
  docker run -i -t   -v /home:/home  --name=rift-demo -v `pwd`/home:/home jclarkastro/rift-demo-cuda92:latest /bin/bash
  cd /;  nohup ./start.sh &  # start condor
  ln -sf /usr/bin/python3 /usr/bin/python  # force python3
 #docker run --detach --gpus all -v /home:/home  --name=rift-demo jclarkastro/rift-demo-cuda92:latest
-``
+```
 If you don't have GPUs available, please don't use the ``--gpus`` option.  Please adjust the ``/home:/home`` option to be appropriate for your filesystem
 * Step 2: Confirm your installation works: Follow the **Confirming your installation works** steps at the [RIFT getting started](https://github.com/oshaughn/research-projects-RIT/blob/master/GETTING_STARTED.md) tutorial
 * Step 3: Set up and launch a simple analysis
