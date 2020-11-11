@@ -17,8 +17,9 @@ Unlike the python example above, where everything was done inline, each step of 
 When we set up our workflow, we decide how many iterations we will perform, and specify the details of how each sub-step of the calculation is performed.
 Each step is performed by some command-line executable.
 
-Also unlike the calculation above, this step involves ``ILE``, a routine which calculates a (marginal) likelihood for each candidate set of binary parameters (here, m1 and m2) by comparing a proposed GW signal to our synthetic data.    ``ILE`` replaces the ``lnL_true`` function we used in the toy model calculation above.
+Also unlike the calculation above, this tutorial uses  ``ILE`` (integrate_likelihood_extrinsic_batchmode), a routine which calculates a (marginal) likelihood for each candidate set of binary parameters (here, m1 and m2) by comparing a proposed GW signal to our synthetic data.    ``ILE`` replaces the ``lnL_true`` function we used in the toy model calculation above.
 
+Similar to the  calculation above, this tutorial uses ``CIP`` (construct_intrinsic_posterior_GenericCoordintaes.py) to construct an approximation to the likelihood based on our training data (from all ILE evaluations in the past); and to construct an approximate posterior distribution based on this approximate likelihood.  Also similar to the toy model, a program ``puffball`` will supplement our posterior with additional points jittered by random errors, to insure wide parameter coverage.  
 
 **Step-by-step process**
 * Step 0: Install prerequisite: Docker (docker.com)
@@ -52,3 +53,13 @@ Again, the [RIFT getting started](https://github.com/oshaughn/research-projects-
 
 
 ==Tutorial 2: Production-quality analysis==
+
+The procedure described in tutorial 1 is exhausting for real analysis: we need to chooise a grid, prior range, iteration structure, and other settings (e.g., the frequency of puffball).  For production-quality analysis, we have encoded best practices into ``util_RIFT_pseudo_pipe.py``.   If you have used LALInference, you can immediately re-use your configuration to analyze with our script
+
+```
+util_RIFT_pseudo_pipe.py --use-ini my.ini --use-coinc coinc.xml --use-osg --cip-explode-jobs 3
+```
+
+```
+util_RIFT_pseudo_pipe.py --gracedb-id G329473 --approx IMRPhenomD --calibration C01 --make-bw-psds --l-max 2 --choose-data-LI-seglen --add-extrinsic
+```
