@@ -23,22 +23,40 @@ Similar to the  calculation above, this tutorial uses ``CIP`` (construct_intrins
 
 **Step-by-step process**
 * Step 0: Install prerequisite: Docker (docker.com)
-* Step 1: Start the container used for this tutorial
+* Step 1: Start the container used for this tutorial, available on docker hub as ``jclarkastro/rift-demo-cuda92:latest`` with [this dockerfile](https://git.ligo.org/james-clark/benchmarking/-/blob/master/RIFT/full-demo/rift-demo-cuda92.Dockerfile)
 ```
- docker run -i -t   -v /home:/home  --name=rift-demo -v `pwd`/home:/home jclarkastro/rift-demo-cuda92:latest /bin/bash
- cd /;  nohup ./start.sh &  # start condor
- ln -sf /usr/bin/python3 /usr/bin/python  # force python3
+docker run --detach --gpus all --name=rift-demo -v ${HOME}:${HOME} jclarkastro/rift-demo-cuda92:latest   # start the container; this should run ./start-condor.sh
+docker exec -it --user albert rift-demo bash  # join the container as user 'albert', not root
+# docker run -i -t   -v /home:/home  --name=rift-demo -v `pwd`/home:/home jclarkastro/rift-demo-cuda92:latest /bin/bash
+# cd /;  nohup ./start.sh &  # start condor
+# ln -sf /usr/bin/python3 /usr/bin/python  # force python3
 #docker run --detach --gpus all -v /home:/home  --name=rift-demo jclarkastro/rift-demo-cuda92:latest
 ```
-If you don't have GPUs available, please don't use the ``--gpus`` option.  Please adjust the ``/home:/home`` option to be appropriate for your filesystem
-* Step 2: Confirm your installation works: Follow the **Confirming your installation works** steps at the [RIFT getting started](https://github.com/oshaughn/research-projects-RIT/blob/master/GETTING_STARTED.md) tutorial
+If you don't have GPUs available, please don't use the ``--gpus`` option.  Please adjust the ``/home:/home`` option to be appropriate for your filesystem.
+
+You can now monitor the internal condor queue system with ``condor_q`` and ``condor_status``.  As time permits, please look at any [condor tutorial](https://research.cs.wisc.edu/htcondor/tutorials/intl-grid-school-3/submit_first.html) to understand how that queuing system works.
+
+When you are **done**, you should close the container with 
+```
+docker stop rift-demo
+docker rm rift-demo
+```
+* Step 2 (optional): Confirm your installation works: Follow the **Confirming your installation works** steps at the [RIFT getting started](https://github.com/oshaughn/research-projects-RIT/blob/master/GETTING_STARTED.md) tutorial
 * Step 3: Set up and launch a simple analysis
 ```
 # Download the analysis
+#   - should already be preent in /rift-demos
+# EITHER DO THIS
 git  clone https://github.com/oshaughn/ILE-GPU-Paper.git
 cd ILE-GPU-Paper/demos/
+# OR DO THIS
+cd /rift-demos
+```
+
+```
 # Set up the analysis
-make test_workflow_batch_gpu_lowlatency
+make test_workflow_batch_lowlatency   # IF YOU HAVE **NO** GPUS
+#make test_workflow_batch_gpu_lowlatency   # IF YOU HAVE GPUS
 cd test_workflow_batch_gpu_lowlatency; ls
 # Launch the analysis
 condor_submit_dag marginalize_intrinsic_parameters_BasicIterationWorkflow.dag
@@ -46,6 +64,15 @@ condor_submit_dag marginalize_intrinsic_parameters_BasicIterationWorkflow.dag
 watch -n 10 condor_q
 ```
 Again, the [RIFT getting started](https://github.com/oshaughn/research-projects-RIT/blob/master/GETTING_STARTED.md) page describes the files being created.
+
+**Troubleshooting**
+* *My jobs don't start?* Depending on your machine, you may not have a lot of memory allocated per slot.  You may also not have any GPUs.  The example above assumes 4Gb of RAM per slot and a GPU per slot in ILE.sub.  You can change ``request_GPUs=1`` to ``request_GPUs=0`` and ``request_memory=4096`` to ``request_memory=1000`` to adjust the requirements accordingly.
+* *My job doesn't produce output?* : You can add the following two lines to ``ILE.sub``
+```
+stream_output=True
+stream_error=True
+```
+
 * Step 4: Plot some results
 ```
  plot_posterior_corner.py --posterior-file posterior-samples-5.dat --parameter mc --parameter eta --plot-1d-extra --ci-list  '[0.9]'  --composite-file all.net --quantiles None  --use-legend 
@@ -63,3 +90,12 @@ util_RIFT_pseudo_pipe.py --use-ini my.ini --use-coinc coinc.xml --use-osg --cip-
 ```
 util_RIFT_pseudo_pipe.py --gracedb-id G329473 --approx IMRPhenomD --calibration C01 --make-bw-psds --l-max 2 --choose-data-LI-seglen --add-extrinsic
 ```
+
+
+
+
+# Bonus tutorials
+
+The docker image ``jclarkastro/rift-demo-cuda92:latest`` comes  pre-installed with 
+* frames and a PSD for a real analysis used for benchmarking
+* test jobs (
