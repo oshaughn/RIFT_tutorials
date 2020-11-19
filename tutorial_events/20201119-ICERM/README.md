@@ -51,9 +51,9 @@ cd /rift-demos
 
 ```
 # Set up the analysis
-make test_workflow_batch_lowlatency   # IF YOU HAVE **NO** GPUS
+make test_workflow_nobatch   # IF YOU HAVE **NO** GPUS
 #make test_workflow_batch_gpu_lowlatency   # IF YOU HAVE GPUS
-cd test_workflow_batch_gpu_lowlatency; ls
+cd test_workflow_nobatch; ls
 # Launch the analysis
 condor_submit_dag marginalize_intrinsic_parameters_BasicIterationWorkflow.dag
 # Monitor the progress of the jobs
