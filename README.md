@@ -1,8 +1,9 @@
 # RIFT_tutorials
-RIFT tutorials
+Tutorials for the Rapid iterative fitting parameter inference toolkit, available as [RIFT via pypi](https://pypi.org/project/RIFT/) and [github](https://github.com/oshaughn/research-projects-RIT)
 
 
 
+## Tutorials index
 * ICERM 2020 tutorial (jupyter notebook on methods; docker + ILE-GPU-Paper for details)
 
 
