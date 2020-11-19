@@ -22,15 +22,11 @@ Also unlike the calculation above, this tutorial uses  ``ILE`` (integrate_likeli
 Similar to the  calculation above, this tutorial uses ``CIP`` (construct_intrinsic_posterior_GenericCoordintaes.py) to construct an approximation to the likelihood based on our training data (from all ILE evaluations in the past); and to construct an approximate posterior distribution based on this approximate likelihood.  Also similar to the toy model, a program ``puffball`` will supplement our posterior with additional points jittered by random errors, to insure wide parameter coverage.  
 
 **Step-by-step process**
-* Step 0: Install prerequisite: Docker (docker.com)
+* Step 0: Install prerequisite: Docker (docker.com).  [Note: if you have /cvmfs and can use either pre-built containers or conda environments, please see [INSTALL.md](https://github.com/oshaughn/research-projects-RIT/blob/master/INSTALL.md) instead, and skip to step 3]
 * Step 1: Start the container used for this tutorial, available on docker hub as ``jclarkastro/rift-demo-cuda92:latest`` with [this dockerfile](https://git.ligo.org/james-clark/benchmarking/-/blob/master/RIFT/full-demo/rift-demo-cuda92.Dockerfile)
 ```
-docker run --detach --gpus all --name=rift-demo -v ${HOME}:${HOME} jclarkastro/rift-demo-cuda92:latest   # start the container; this should run ./start-condor.sh
+docker run --detach --gpus all --cpuset-cpus 0-3 --name=rift-demo -v ${HOME}:${HOME} jclarkastro/rift-demo-cuda92:latest   # start the container; this should run ./start-condor.sh
 docker exec -it --user albert rift-demo bash  # join the container as user 'albert', not root
-# docker run -i -t   -v /home:/home  --name=rift-demo -v `pwd`/home:/home jclarkastro/rift-demo-cuda92:latest /bin/bash
-# cd /;  nohup ./start.sh &  # start condor
-# ln -sf /usr/bin/python3 /usr/bin/python  # force python3
-#docker run --detach --gpus all -v /home:/home  --name=rift-demo jclarkastro/rift-demo-cuda92:latest
 ```
 If you don't have GPUs available, please don't use the ``--gpus`` option.  Please adjust the ``/home:/home`` option to be appropriate for your filesystem.
 
