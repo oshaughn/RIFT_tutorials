@@ -71,7 +71,7 @@ stream_error=True
 
 * Step 4: Plot some results
 ```
- plot_posterior_corner.py --posterior-file posterior-samples-5.dat --parameter mc --parameter eta --plot-1d-extra --ci-list  '[0.9]'  --composite-file all.net --quantiles None  --use-legend 
+ plot_posterior_corner.py --posterior-file posterior_samples-4.dat --parameter mc --parameter eta --plot-1d-extra --ci-list  '[0.9]'  --composite-file all.net --quantiles None  --use-legend 
 ```
 
 
