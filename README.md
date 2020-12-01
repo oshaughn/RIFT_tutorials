@@ -16,9 +16,9 @@ Tutorials for the Rapid iterative fitting parameter inference toolkit, available
 **Usage tutorials**
 * [RIFT Getting Started](https://github.com/oshaughn/research-projects-RIT/blob/master/GETTING_STARTED.md) : Distributed with source. ILE-GPU paper demo. Heavy on internals
 * LIGO [RIFT tutorial](https://git.ligo.org/pe/tutorials/-/blob/master/offline_RIFT.md)  (requires LIGO authentication).
+* [runmon tutorial](https://git.ligo.org/richard.udall/runmonitor_rift/-/wikis/Summary)
 
-
-**Techniccal tutorials and benchmarking**
+**Technical tutorials and benchmarking**
 For experts
 
 * James Clark's [RIFT benchmarking](https://git.ligo.org/james-clark/benchmarking/-/tree/master/RIFT/full-demo)
