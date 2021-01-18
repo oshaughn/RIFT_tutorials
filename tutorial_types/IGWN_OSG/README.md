@@ -4,7 +4,11 @@ To use RIFT on the IGWN OSG, you need relatively few changes, usually ``--use-os
 ```
 util_RIFT_pseudo_pipe.py --gracedb-id G329473 --approx IMRPhenomD --calibration C01 --make-bw-psds --l-max 2 --choose-data-LI-seglen --add-extrinsic --use-osg --condor-local-nonworker
 ```
-Note that you will also want to set your singularity environment variables, as described below, before running this command.
+Note that 
+* you will also want to set your singularity environment variables, as described below, before running this command.
+* OSG IGWN submission requires certain submit nodes.  You will need to launch from an appropriate head node (e.g., ``ldas-osg`` at CIT)
+
+
 
 **Special options**
 
