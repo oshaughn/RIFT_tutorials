@@ -1,4 +1,8 @@
 
+**Links**
+* [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/)
+
+**Instructions**
 To use RIFT on the IGWN OSG, you need relatively few changes, usually ``--use-osg`` for the top-level pipeline command.  We recommend adjusting the standard tutorial command to add two arguments, as follows:
 
 ```
@@ -7,7 +11,7 @@ util_RIFT_pseudo_pipe.py --gracedb-id G329473 --approx IMRPhenomD --calibration 
 Note that 
 * you will also want to set your singularity environment variables, as described below, before running this command.
 * OSG IGWN submission requires certain submit nodes.  You will need to launch from an appropriate head node (e.g., ``ldas-osg`` at CIT)
-
+* Don't forget about accounting tags!  We use the same two environment variables to set accounting tags for both local and OSG runs.
 
 
 **Special options**
@@ -26,10 +30,12 @@ Note that
 * ``SINGULARITY_BASE_EXE_DIR``: On the OSG, your jobs run in singularity containers.  This directory (usually ``/usr/local/bin``) identifies where in the container RIFT executables are set.
 * ``SINGULARITY_RIFT_IMAGE``: On the OSG, your jobs run in singularity containers.  This path identifies which container yo uare running.  Usually ``/cvmfs/singularity.opensciencegrid.org/james-clark/research-projects-rit/rift:latest``
 * ``X509_USER_PROXY`` : Usually automatically set for you.   Needed for authenticated CVMFS and gracedb access.
-* ``OSG_DESIRED_SITES``: Use to target specific clusters
-* ``OSG_UNDESIRED_SITES``: Use to avoid clusters, particularly those where failures or problems consistently occur.  For this and the above, contact us for a list of cluster names.  At time of writing, some cluster names are
+* ``OSG_DESIRED_SITES``: Use to target specific clusters; see  [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/)
+* ``OSG_UNDESIRED_SITES``: Use to avoid clusters, particularly those where failures or problems consistently occur; see  [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/).  For this and the above, contact us for a list of cluster names.  At time of writing, some cluster names are
 ```
-   CIT
+   LIGO-CIT
    QB2
+   GATech
    PIC
 ```
+
