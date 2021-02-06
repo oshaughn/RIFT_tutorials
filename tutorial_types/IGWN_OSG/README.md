@@ -31,9 +31,10 @@ Note that
 * ``SINGULARITY_RIFT_IMAGE``: On the OSG, your jobs run in singularity containers.  This path identifies which container yo uare running.  Usually ``/cvmfs/singularity.opensciencegrid.org/james-clark/research-projects-rit/rift:latest``
 * ``X509_USER_PROXY`` : Usually automatically set for you.   Needed for authenticated CVMFS and gracedb access.
 * ``OSG_DESIRED_SITES``: Use to target specific clusters; see  [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/)
-* ``OSG_UNDESIRED_SITES``: Use to avoid clusters, particularly those where failures or problems consistently occur; see  [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/).  For this and the above, contact us for a list of cluster names.  At time of writing, some cluster names are
+* ``OSG_UNDESIRED_SITES``: Use to avoid clusters, particularly those where failures or problems consistently occur; see  [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/).  Format is a quoted set of names, separated by commas (e.g., ``"LIGO-CIT, PIC"``).  For this and the above, contact us for a list of cluster names.  At time of writing, some cluster names are
 ```
    LIGO-CIT
+   LIGO-WA
    QB2
    GATech
    PIC
