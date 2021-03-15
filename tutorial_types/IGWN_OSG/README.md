@@ -9,6 +9,7 @@ source /cvmfs/oasis.opensciencegrid.org/ligo/sw/conda/bin/activate
 conda activate igwn-py37-20210310
 export LIGO_USER_NAME=albert.einstein
 export LIGO_ACCOUNTING=ligo.sim.o3.cbc.pe.lalinferencerapid
+export SINGULARITY_RIFT_IMAGE=/cvmfs/singularity.opensciencegrid.org/james-clark/research-projects-rit/rift:production
 ligo-proxy-init albert.einstein
 ```
 
