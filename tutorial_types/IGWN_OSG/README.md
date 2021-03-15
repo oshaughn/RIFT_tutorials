@@ -3,6 +3,16 @@
 * [IGWN condor submission guide](https://computing.docs.ligo.org/guide/condor/submission/)
 
 **Instructions**
+Before you start, you will need to start your IGWN environment and set some environment variables. At the time of writing, the following commands are needed.
+```
+source /cvmfs/oasis.opensciencegrid.org/ligo/sw/conda/bin/activate
+conda activate igwn-py37-20210310
+export LIGO_USER_NAME=albert.einstein
+export LIGO_ACCOUNTING=ligo.sim.o3.cbc.pe.lalinferencerapid
+ligo-proxy-init albert.einstein
+```
+
+
 To use RIFT on the IGWN OSG, you need relatively few changes, usually ``--use-osg`` for the top-level pipeline command.  We recommend adjusting the standard tutorial command to add two arguments, as follows:
 
 ```
@@ -17,9 +27,9 @@ Note that
 **Special options**
 
 * util_RIFT_pseudo_pipe:
-** ``-use-osg``: This sets up OSG use with standard options
-** ``--condor-local-nonworker``: This causes non-ILE jobs to run locally (e.g., on the current head node). For very fast jobs, this is much more efficient.
-** ``--condor-nogrid-nonworker``: This causes non-ILE jobs to run on a local cluster (i.e., ``DESIRED_SITES=nogrid; flock_local=True``).  Should be better than --condor-local-nonworker
+   * ``-use-osg``: This sets up OSG use with standard options
+   * ``--condor-local-nonworker``: This causes non-ILE jobs to run locally (e.g., on the current head node). For very fast jobs, this is much more efficient.
+   * ``--condor-nogrid-nonworker``: This causes non-ILE jobs to run on a local cluster (i.e., ``DESIRED_SITES=nogrid; flock_local=True``).  Should be better than --condor-local-nonworker
 
 
 * ILE (usually these are set by the above, but you may need to do this yourself)
